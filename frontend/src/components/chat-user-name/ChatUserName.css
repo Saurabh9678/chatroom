@@ -1,0 +1,23 @@
+.name-plate{
+    width: 98%;
+    height: 55px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    border-radius: 5px;
+    margin-left: 3px;
+}
+
+.online-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: green;
+    margin-right: 10px;
+}
+.name-area{
+    margin-left: 20px;
+    font-size: 24px;
+}

@@ -1,0 +1,234 @@
+.chat-room-parent {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(242, 242, 242);
+}
+
+.chat-room-navbar {
+  width: 100%;
+  height: 8vh;
+  background-color: white;
+}
+
+.chat-room-navbar > p {
+  padding-top: 10px;
+  padding-left: 35px;
+  font-size: 30px;
+}
+
+.chat-room-body {
+  width: 100%;
+  display: flex;
+  margin-top: 6%;
+  justify-content: space-between;
+}
+
+.chat-container {
+  width: 60%;
+  height: 65vh;
+  background-color: white;
+  margin-left: 7%;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.chat-header {
+  width: 100%;
+  height: 6vh;
+  background-color: white;
+  display: flex;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.chat-header > span {
+  margin-left: 5%;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.chat-header > button {
+  margin-right: 2%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  border: none;
+  font-size: 25px;
+}
+
+.chat-body {
+  width: 100%;
+  height: 52vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+}
+
+.chat-body .message-container{
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  color: #A3A4A4;
+}
+
+.chat-body .message-container::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-body .message {
+  height: auto;
+  padding: 20px;
+  display: flex;
+}
+
+.chat-body .message .message-body {
+  width: 100%;
+  height: 100%;
+  min-height: 20px;
+  max-width: max-content;
+  background-color: #01D4C4;
+  border-radius: 6px;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+#you {
+  justify-content: flex-start;
+}
+
+#you .message-body {
+  justify-content: flex-start;
+}
+
+#you .message-author {
+  justify-content: flex-start;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 5px;
+}
+#you .message-time {
+  justify-content: flex-end;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+#other {
+  justify-content: flex-end;
+}
+
+#other .message-body {
+  justify-content: flex-end;
+  background-color: #acaaaa;
+}
+
+#other .message-author {
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 12px;
+  margin-right: 9px;
+}
+#other .message-time {
+  justify-content: flex-start;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+
+.chat-window .chat-body .message .message-meta {
+  display: flex;
+  
+}
+
+
+.chat-footer {
+  width: 100%;
+  height: 6.7vh;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-footer > input {
+  width: 86%;
+  height: 55%;
+  margin-left: 15px;
+  padding-left: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.chat-footer > input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.chat-footer > button {
+  width: 8%;
+  height: 55%;
+  margin-right: 17px;
+  border: none;
+  border-radius: 7px;
+  font-size: 22px;
+  background-color: #2196f3;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s;
+}
+
+.chat-footer > button:hover {
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #2196f3;
+  }
+  100% {
+    box-shadow: 0 0 20px #2196f3;
+  }
+}
+
+.chat-online-box {
+  width: 20%;
+  height: 65vh;
+  background-color: white;
+  position: relative;
+  margin-right: 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.online-div {
+  width: 100%;
+  height: 8%;
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-online-area {
+  width: 100%;
+  height: 90%;
+  
+}
