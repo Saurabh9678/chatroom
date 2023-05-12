@@ -1,7 +1,8 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
-require('dotenv').config()
+require("dotenv").config();
+const { detectLanguage, translatetext } = require("./controllers/translate");
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ const io = new Server(server, {
 });
 
 let users = [];
+const targetLanguage = "as";
 
 io.on("connection", (socket) => {
   console.log(`User connected id: ${socket.id}`);
@@ -42,8 +44,28 @@ io.on("connection", (socket) => {
     //console.log(); gives number of users in this room
   });
 
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
+  socket.on("send_message", async (data) => {
+    let responseData = {};
+    if (data.tag === "chatgpt") {
+      const translatedText = data.message;
+      responseData = {
+        room: data.room,
+        author: data.author,
+        message: data.message,
+        translatedText,
+        time: data.time,
+      };
+    } else {
+      const translatedText = await translatetext(data.message, targetLanguage);
+      responseData = {
+        room: data.room,
+        author: data.author,
+        message: data.message,
+        translatedText,
+        time: data.time,
+      };
+    }
+    io.to(data.room).emit("receive_message", responseData);
   });
 
   socket.on("leave_room", ({ room, name }) => {

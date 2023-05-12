@@ -27,15 +27,15 @@ const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
         new Date(Date.now()).getHours() +
         ":" +
         new Date(Date.now()).getMinutes();
-      const messageData = {
-        room: roomId,
-        author: name,
-        message: currentMessage,
-        time: timestamp,
-      };
-      setMessageList((list) => [...list, messageData]);
-      socket.emit("send_message", messageData);
       if (currentMessage.startsWith("#chatgpt")) {
+        const messageData = {
+          room: roomId,
+          author: name,
+          message: currentMessage,
+          tag:"chatgpt",
+          time: timestamp,
+        };
+        socket.emit("send_message", messageData);
         const slicedMessage = currentMessage.slice("#chatgpt".length);
         setCurrentMessage("");
         axios
@@ -61,6 +61,7 @@ const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
               room: roomId,
               author: "ChatGPT",
               message: response.data.choices[0].message.content,
+              tag:"chatgpt",
               time: timestamp,
             };
             setMessageList((list) => [...list, messageData]);
@@ -70,6 +71,14 @@ const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
             console.log(error);
           });
       } else {
+        const messageData = {
+          room: roomId,
+          author: name,
+          message: currentMessage,
+          tag: "user",
+          time: timestamp,
+        };
+        socket.emit("send_message", messageData);
         setCurrentMessage("");
       }
     }
@@ -126,7 +135,7 @@ const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
                             {messageContent.author}
                           </div>
                           <div className="message-body">
-                            {messageContent.message}
+                            {messageContent.translatedText}
                           </div>
                           <div className="message-time">
                             {messageContent.time}
