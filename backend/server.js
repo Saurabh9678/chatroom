@@ -46,26 +46,13 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", async (data) => {
     let responseData = {};
-    if (data.tag === "chatgpt") {
-      const translatedText = data.message;
-      responseData = {
-        room: data.room,
-        author: data.author,
-        message: data.message,
-        translatedText,
-        time: data.time,
-      };
-    } else {
-      const translatedText = await translatetext(data.message, targetLanguage);
-      responseData = {
-        room: data.room,
-        author: data.author,
-        message: data.message,
-        translatedText,
-        time: data.time,
-      };
-    }
-    io.to(data.room).emit("receive_message", responseData);
+    responseData = {
+      room: data.room,
+      author: data.author,
+      message: data.message,
+      time: data.time,
+    };
+    socket.to(data.room).emit("receive_message", responseData);
   });
 
   socket.on("leave_room", ({ room, name }) => {

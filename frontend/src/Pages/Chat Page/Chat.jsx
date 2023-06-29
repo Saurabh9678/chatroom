@@ -4,6 +4,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import constants from "../../constants/constants";
 import axios from "axios";
 import ChatUserName from "../../components/chat-user-name/ChatUserName";
+import encryptData from "../../security/encrypt"
 
 const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
   const back = () => {
@@ -35,6 +36,7 @@ const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
           tag:"chatgpt",
           time: timestamp,
         };
+        setMessageList((list) => [...list, messageData]);
         socket.emit("send_message", messageData);
         const slicedMessage = currentMessage.slice("#chatgpt".length);
         setCurrentMessage("");
@@ -78,8 +80,15 @@ const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
           tag: "user",
           time: timestamp,
         };
-        socket.emit("send_message", messageData);
+        
+        const stringMessage = JSON.stringify(messageData);
+        const encryptedMessage = encryptData(stringMessage, process.env.PUBLIC_KEY);
+        
+        socket.emit("send_message", encryptedMessage);
+        
+        setMessageList((list) => [...list, messageData]);
         setCurrentMessage("");
+        
       }
     }
   };
@@ -135,7 +144,7 @@ const Chat = ({ name, roomId, setShowChat, setName, setRoomId, socket }) => {
                             {messageContent.author}
                           </div>
                           <div className="message-body">
-                            {messageContent.translatedText}
+                            {messageContent.message}
                           </div>
                           <div className="message-time">
                             {messageContent.time}
